@@ -22,9 +22,17 @@ public class User {
     @Column(nullable = false)
     public String passwordHash;
 
-    @Column(nullable = false)
-    public String roles; // Ejemplo: "USER,ADMIN"
-
     @Column
     public String refreshToken;
+
+    @Column(name = "is_active")
+    public boolean isActive;
+
+    @Column
+    public String email;
+
+    @Column
+    public String telefono;
+    
+
 }

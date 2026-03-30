@@ -1,8 +1,11 @@
 
-package org.acme;
+package org.acme.resources;
 
 import org.acme.models.User;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -26,6 +29,8 @@ public class AuthResource {
     AuthService authService;
     @Inject
     UserRepository userRepository;
+    @Inject
+    JsonWebToken jsonWebToken;
 
     @POST
     @Path("/register")
@@ -77,8 +82,15 @@ public class AuthResource {
 
     @GET
     @Path("/validate")
+    @Authenticated
     public Response validate() {
-        // Si el token es válido, Quarkus lo validará automáticamente
-        return Response.ok().entity("Token válido").build();
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("valid", true);
+        payload.put("username", jsonWebToken.getName());
+        payload.put("issuer", jsonWebToken.getIssuer());
+        payload.put("subject", jsonWebToken.getSubject());
+        payload.put("groups", jsonWebToken.getGroups());
+        payload.put("expires_at", jsonWebToken.getExpirationTime());
+        return Response.ok(payload).build();
     }
 }

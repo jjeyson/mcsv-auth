@@ -1,34 +1,46 @@
 
 package org.acme.services;
 
-import org.acme.models.User;
-import org.mindrot.jbcrypt.BCrypt;
-
-import io.smallrye.jwt.build.Jwt;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
-
-import org.acme.repository.UserRepository;
 import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import org.acme.models.Rols;
+import org.acme.models.User;
+import org.acme.repository.RolsRepository;
+import org.acme.repository.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import io.smallrye.jwt.build.Jwt;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @ApplicationScoped
 
 public class AuthService {
+    @ConfigProperty(name = "jwt.issuer")
+    String jwtIssuer;
+
     @Inject
     UserRepository userRepository;
+
+    @Inject
+    RolsRepository rolsRepository;
+
+    @Inject
+    EntityManager entityManager;
 
     @Transactional
     public User register(String username, String password, String roles) {
         User user = new User();
         user.username = username;
         user.passwordHash = hashPassword(password);
-        user.roles = roles;
         userRepository.persist(user);
         return user;
     }
@@ -48,22 +60,29 @@ public class AuthService {
 
     public String generateAccessToken(User user) {
         Set<String> rolesSet = new HashSet<>();
-        if (user.roles != null) {
-            for (String r : user.roles.split(",")) {
-                rolesSet.add(r.trim());
+        if (user.id != null) {
+            for (Rols rol : rolsRepository.findByIdUser(user.id)) {
+                if (rol.descripcion != null) {
+                    String descripcion = rol.descripcion.trim();
+                    if (!descripcion.isEmpty()) {
+                        rolesSet.add(descripcion);
+                    }
+                }
             }
         }
-        return Jwt.issuer("auth-service")
+        return Jwt.issuer(jwtIssuer)
+                .subject(user.username)
                 .upn(user.username)
                 .groups(rolesSet)
                 .expiresIn(Duration.ofHours(1))
                 .sign();
     }
 
+    @Transactional
     public String generateRefreshToken(User user) {
         String refreshToken = UUID.randomUUID().toString();
         user.refreshToken = refreshToken;
-        userRepository.persist(user);
+        entityManager.merge(user);
         return refreshToken;
     }
 

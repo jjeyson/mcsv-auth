@@ -3,8 +3,8 @@ POST http://localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "username": "usuario1",
-  "password": "password123"
+  "username": "crojas",
+  "password": "crojas"
 }
 
 ### Login de usuario
@@ -12,8 +12,8 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "username": "usuario1",
-  "password": "password123"
+  "username": "crojas",
+  "password": "crojas"
 }
 
 # NOTA:
@@ -25,10 +25,10 @@ POST http://localhost:8080/auth/refresh
 Content-Type: application/json
 
 {
-  "username": "usuario1",
-  "refresh_token": "AQUÍ_PEGA_EL_REFRESH_TOKEN"
+  "username": "crojas",
+  "refresh_token": "5dad3a4b-9427-4e5b-8817-ea9f144a1ba0"
 }
 
 ### Validar token
 GET http://localhost:8080/auth/validate
-Authorization: Bearer AQUÍ_PEGA_EL_ACCESS_TOKEN
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGgtc2VydmljZS5rdWFycXVzLmNvbSIsInN1YiI6ImNyb2phcyIsInVwbiI6ImNyb2phcyIsImdyb3VwcyI6W10sImlhdCI6MTc3NDg0MTMxNSwiZXhwIjoxNzc0ODQ0OTE1LCJqdGkiOiJjNmQ5MmJhYi1hZjgxLTRhN2UtYTJkNC1lMjdhMzJhNjk2ZjcifQ.TVoyXgIT8rYaNDKeNmurfgLiW83Y_PhYI8ICFxrsMuLr2n9vx6oLHXyGf1-jVg5CYDASbU4-WPeaTOj7LYeGM8d1YPps5cJbH64RBtIJcct6udshmV4iOk2a81nGdYUlB_s1cfDdH7FivZiWcEtSsxbW_rqcFTQITykNr98hd1x9M9OM8a_o35CSHQwfEjqkikQfORKA9g2IpyNO-UJ4VzE3_93g_Xwcswn04BLQnPRogptZ5_jo0Mw8cCQA2G_7EcU0IvGIlVo_9mvhy_WOHGevSGllFrZ39jvADuxJp0l9m0m979Wtdh50bBVJXJs2RvLalLMeaE8_3khj42yr_w
