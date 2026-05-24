@@ -12,18 +12,18 @@ import org.acme.repository.RolsRepository;
 import org.acme.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @ApplicationScoped
 
 public class AuthService {
+    private static final Logger log = LoggerFactory.getLogger(AuthService.class);
     @ConfigProperty(name = "jwt.issuer")
     String jwtIssuer;
 
@@ -46,6 +46,7 @@ public class AuthService {
     }
 
     public User validateCredentials(String username, String password) {
+        
         log.info("Validating credentials for user: {}", username);
 
         User user = userRepository.findByUsername(username);

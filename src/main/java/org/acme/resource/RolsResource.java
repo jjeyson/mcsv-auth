@@ -1,4 +1,4 @@
-package org.acme.resources;
+package org.acme.resource;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 
-package org.acme.resources;
+package org.acme.resource;
 
 import org.acme.models.User;
 
