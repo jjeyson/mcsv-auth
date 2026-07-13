@@ -32,14 +32,14 @@
 
 
     <dependencies>
-        <dependency>
+        <!-- <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-jackson</artifactId>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
@@ -88,7 +88,11 @@
             <scope>compile</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.think</groupId>
+            <artifactId>x-artefacto-pagination</artifactId>
+            <version>1.0.4</version>
+        </dependency>
 
     </dependencies>
 

@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login de usuario
-POST http://localhost:9001/auth/login
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
@@ -32,13 +32,3 @@ Content-Type: application/json
 ### Validar token
 GET http://localhost:8081/mcsv-login/auth/validate
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGgtc2VydmljZS5rdWFycXVzLmNvbSIsInN1YiI6ImNyb2phcyIsInVwbiI6ImNyb2phcyIsImdyb3VwcyI6W10sImlhdCI6MTc3OTY3NDA3MywiZXhwIjoxNzc5Njc3NjczLCJqdGkiOiI5MzlmMWYwYy0yODFlLTQ4MzQtODk0ZC0xOTBiODU4YTEyYTkifQ.ZoaPRxO5LbXikrv932I1856XKHu5JWdKAYlpyqaY4tesjix8UZ4xCAZZGOJ1rkJ25uB1DlKtD04ZEojiOrhRCunUaULHjpBV9g2hT2wqAh-VLFCoyLEAaCQcyFWvByM9EVoHl4koazG2yOf_9tLsjwISTjhEbnWO7WChVHefU5wXUVjrvEerowwcZH9RcthAtFXmzTGAjRUTHPtf_3--lUifeMV2XlouJWObJCZV75AQb0PNpEHGzJRqaZ_4C6BuUeQRo9jZEHTFTdL5xtr1PU95UP1L-h8rp5UmzmpsaVlhqFhELn-Eu4TcUZiE6mMC5x2-p-Jh_CPMDHZ1KjMh1A
-
-
-### Login de usuario por kong
-POST http://localhost:8081/mcsv-login/auth/login
-Content-Type: application/json
-
-{
-  "username": "crojas",
-  "password": "crojas"
-}

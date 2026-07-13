@@ -1,0 +1,25 @@
+### Users - Paginación (UserResource)
+POST http://localhost:9001/users/pagination
+Content-Type: application/json
+
+{
+  "pageNumber": 0,
+  "rowsPerPage": 10,
+  "filters": [],
+  "sort": []
+}
+
+### Users - Paginación con filtro por username
+POST http://localhost:9001/users/pagination
+Content-Type: application/json
+
+{
+  "pageNumber": 0,
+  "rowsPerPage": 10,
+  "filters": [
+    
+  ],
+  "sort": [
+    
+  ]
+}

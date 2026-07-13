@@ -1,6 +1,8 @@
 
 package org.acme.repository;
 
+
+
 import org.acme.models.User;
 
 
@@ -10,7 +12,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepositoryBase<User, Long> {
+
     public User findByUsername(String username) {
         return find("username", username).firstResult();
     }
+
+
+
 }
