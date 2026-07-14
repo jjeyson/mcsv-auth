@@ -2,10 +2,14 @@ package org.acme.commons;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -277,6 +281,87 @@ public final class SpecificationProjectionUtil {
          }
 
 
+        private static Object convertValue(Object value, Class<?> targetType) {
+            if (value == null || targetType == null || targetType.isInstance(value)) {
+                return value;
+            }
+
+            if (targetType == String.class) {
+                if (value instanceof Date date) {
+                    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+                }
+                if (value instanceof LocalDate localDate) {
+                    return localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                }
+                if (value instanceof LocalDateTime localDateTime) {
+                    return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                }
+                return String.valueOf(value);
+            }
+
+            if (targetType == Long.class || targetType == long.class) {
+                if (value instanceof Number number) {
+                    return number.longValue();
+                }
+                return Long.valueOf(value.toString());
+            }
+
+            if (targetType == Integer.class || targetType == int.class) {
+                if (value instanceof Number number) {
+                    return number.intValue();
+                }
+                return Integer.valueOf(value.toString());
+            }
+
+            if (targetType == Double.class || targetType == double.class) {
+                if (value instanceof Number number) {
+                    return number.doubleValue();
+                }
+                return Double.valueOf(value.toString());
+            }
+
+            if (targetType == Boolean.class || targetType == boolean.class) {
+                if (value instanceof Boolean bool) {
+                    return bool;
+                }
+                return Boolean.valueOf(value.toString());
+            }
+
+            if (targetType == LocalDate.class) {
+                if (value instanceof LocalDate localDate) {
+                    return localDate;
+                }
+                if (value instanceof Date date) {
+                    return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                }
+                if (value instanceof String text) {
+                    return LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                }
+            }
+
+            if (targetType == LocalDateTime.class) {
+                if (value instanceof LocalDateTime localDateTime) {
+                    return localDateTime;
+                }
+                if (value instanceof Date date) {
+                    return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                }
+                if (value instanceof String text) {
+                    try {
+                        return LocalDateTime.parse(text);
+                    } catch (Exception ignored) {
+                        return LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                    }
+                }
+            }
+
+            if (targetType.isEnum() && value instanceof String text) {
+                return Enum.valueOf((Class<? extends Enum>) targetType, text);
+            }
+
+            return value;
+        }
+
         public static <R> R map(
                     Object[] row,
                     List<String> fields,
@@ -320,7 +405,11 @@ public final class SpecificationProjectionUtil {
                                         .orElse(null);
 
                         if (setter != null) {
-                            setter.invoke(builder, value);
+                            Class<?>[] paramTypes = setter.getParameterTypes();
+                            Object convertedValue = paramTypes.length > 0
+                                    ? convertValue(value, paramTypes[0])
+                                    : value;
+                            setter.invoke(builder, convertedValue);
                         }
                     }
 

@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.acme.commons.PageResponse;
-import org.acme.commons.PageableCommons;
-import org.acme.commons.PaginationModel;
-import org.acme.commons.SpecificationProjectionUtil;
+
 import org.acme.dto.UserResponseDto;
 import org.acme.models.User;
 
+import com.think.xartefactopagination.PageResponse;
+import com.think.xartefactopagination.PageableCommons;
+import com.think.xartefactopagination.PaginationModel;
+import com.think.xartefactopagination.SpecificationProjectionUtil;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

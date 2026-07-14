@@ -1,7 +1,9 @@
 package org.acme.resource;
 
-import org.acme.commons.PaginationModel;
+
 import org.acme.services.UserService;
+
+import com.think.xartefactopagination.PaginationModel;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -16,8 +18,9 @@ public class UserResource {
 
     @POST
     @Path("/pagination")
-    public Response pagination(PaginationModel paginationModel) {
+    public Response pagination(PaginationModel paginationModel) throws ReflectiveOperationException{
         System.out.println("paginationModel: " + paginationModel);
+        //return Response.ok( service.paginationProjections(paginationModel) ).build();
         return Response.ok( service.paginationProjections(paginationModel) ).build();
     }
 
