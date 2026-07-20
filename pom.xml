@@ -101,6 +101,10 @@
         <repository>
             <id>github</id>
             <url>https://maven.pkg.github.com/THINK-QUARKUS/x-artefacto-pagination</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>            
         </repository>
     </repositories>    
 
