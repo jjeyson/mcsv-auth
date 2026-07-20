@@ -59,3 +59,4 @@ jobs:
         run: |
           docker build -f src/main/docker/Dockerfile.native -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
