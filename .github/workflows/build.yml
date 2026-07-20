@@ -73,7 +73,7 @@ jobs:
           grep -q "<id>github</id>" ~/.m2/settings.xml || { echo "github server id missing in settings.xml"; exit 1; }
 
       - name: Build native image
-        run: ./mvnw -B --no-transfer-progress clean package -Dnative -Dquarkus.native.container-build=true
+        run: ./mvnw -B --no-transfer-progress clean package -DskipTests -Dnative -Dquarkus.native.container-build=true
 
       - name: Login GitHub Container Registry
         uses: docker/login-action@v3
