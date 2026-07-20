@@ -42,6 +42,7 @@ public class PaginationModel {
                 .collect(Collectors.toMap(SortModel::getColName, SortModel::getDirection));
 
     }
+    
 
     @JsonIgnore
     public Map<String, Object> getFiltersMap() {
