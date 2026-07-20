@@ -104,9 +104,9 @@
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
-            </snapshots>            
+            </snapshots>
         </repository>
-    </repositories>    
+    </repositories>
 
     <build>
         <plugins>
