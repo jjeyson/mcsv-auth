@@ -39,7 +39,7 @@ jobs:
           MAVEN_TOKEN: ${{ secrets.BUILD_TOKEN }}
 
       - name: Build native image
-        run: ./mvnw clean package -Dnative -Dquarkus.native.container-build=true
+        run: ./mvnw -B --no-transfer-progress clean package -Dnative -Dquarkus.native.container-build=true
 
       - name: Login GitHub Container Registry
         uses: docker/login-action@v3
