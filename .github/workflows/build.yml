@@ -31,8 +31,8 @@ jobs:
           java-version: '25'
           cache: 'maven'
           server-id: github
-          server-username: carojasc
-          server-password: ${{ secrets.BUILD_TOKEN }}
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_TOKEN
 
         env:
           MAVEN_USERNAME: ${{ secrets.BUILD_USERNAME }}
@@ -52,7 +52,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
+          username: ${{ secrets.BUILD_USERNAME }}
           password: ${{ secrets.BUILD_TOKEN }}
 
       - name: Build and push Docker image
