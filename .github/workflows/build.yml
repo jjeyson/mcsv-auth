@@ -1,4 +1,4 @@
-name: Build Native Quarkus Application
+name: Build Native Quarkus Application v1
 
 on:
   push:
