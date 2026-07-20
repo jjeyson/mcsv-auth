@@ -97,6 +97,13 @@
 
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/THINK-QUARKUS/x-artefacto-pagination</url>
+        </repository>
+    </repositories>    
+
     <build>
         <plugins>
             <plugin>
@@ -161,4 +168,6 @@
             </properties>
         </profile>
     </profiles>
+
+   
 </project>
