@@ -8,4 +8,5 @@ public interface ICrudCommons<REQ, RES, ID> {
     RES findById(ID id);
 
     RES delete(ID id);
+    
 }

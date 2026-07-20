@@ -36,13 +36,14 @@ public class PaginationModel {
 
     }
 
+    
     @JsonIgnore
     public Map<String, String> getParamsOrderBy() {
         return this.getSorts().stream()
                 .collect(Collectors.toMap(SortModel::getColName, SortModel::getDirection));
 
     }
-    
+
 
     @JsonIgnore
     public Map<String, Object> getFiltersMap() {

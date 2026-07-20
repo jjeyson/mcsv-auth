@@ -57,7 +57,6 @@ public final class SpecificationProjectionUtil {
                     + (orderByClause != null ? orderByClause + " " : "");
 
 
-
             TypedQuery<?> selectQuery = (TypedQuery) entityManager.createQuery(jpql);
 
             selectQuery = (TypedQuery<R>) setQueryParams(filtersMap, selectQuery);

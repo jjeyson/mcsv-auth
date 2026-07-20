@@ -2,7 +2,6 @@ package org.acme.commons;
 
 
 
-
 public class PageableCommons {
 
     public final int index;

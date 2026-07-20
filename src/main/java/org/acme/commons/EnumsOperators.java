@@ -1,5 +1,6 @@
 package org.acme.commons;
 
+
 public enum EnumsOperators {
 
     EQUAL("="),

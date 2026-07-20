@@ -21,3 +21,4 @@ public class SortModel {
     private String type = "string";    
 
 }
+
