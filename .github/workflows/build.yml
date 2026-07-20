@@ -47,7 +47,7 @@ jobs:
             <servers>
               <server>
                 <id>github</id>
-                <username>x-access-token</username>
+                <username>${MAVEN_USERNAME}</username>
                 <password>${MAVEN_TOKEN}</password>
               </server>
             </servers>
