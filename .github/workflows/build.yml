@@ -38,25 +38,6 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.BUILD_USERNAME }}
           MAVEN_TOKEN: ${{ secrets.BUILD_TOKEN }}
 
-
-      - name: Configurar Maven para GitHub Packages
-        run: |
-          mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml << 'EOF'
-          <settings>
-            <servers>
-              <server>
-                <id>github</id>
-                <username>${MAVEN_USERNAME}</username>
-                <password>${MAVEN_TOKEN}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-        env:
-          MAVEN_USERNAME: ${{ secrets.BUILD_USERNAME }}
-          MAVEN_TOKEN: ${{ secrets.BUILD_TOKEN }}      
-
       - name: Build native image
         run: ./mvnw -B --no-transfer-progress clean package -Dnative -Dquarkus.native.container-build=true
 
