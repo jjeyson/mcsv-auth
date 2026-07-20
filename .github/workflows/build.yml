@@ -30,6 +30,13 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
           cache: 'maven'
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build native image
         run: ./mvnw clean package -Dnative -Dquarkus.native.container-build=true
