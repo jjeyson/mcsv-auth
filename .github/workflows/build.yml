@@ -42,15 +42,17 @@ jobs:
       - name: Configurar Maven para GitHub Packages
         run: |
           mkdir -p ~/.m2
-          echo "<settings>
+          cat > ~/.m2/settings.xml << 'EOF'
+          <settings>
             <servers>
               <server>
                 <id>github</id>
-                <username>${env.MAVEN_USERNAME}</username>
-                <password>${env.MAVEN_TOKEN}</password>
+                <username>${MAVEN_USERNAME}</username>
+                <password>${MAVEN_TOKEN}</password>
               </server>
             </servers>
-          </settings>" > ~/.m2/settings.xml
+          </settings>
+          EOF
         env:
           MAVEN_USERNAME: ${{ secrets.BUILD_USERNAME }}
           MAVEN_TOKEN: ${{ secrets.BUILD_TOKEN }}      
