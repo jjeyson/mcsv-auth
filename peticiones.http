@@ -1,5 +1,5 @@
 ### Registro de usuario
-POST http://localhost:8080/auth/register
+POST http://localhost:8081/mcsv-login/auth/register
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login de usuario
-POST http://localhost:8080/auth/login
+POST http://localhost:8081/mcsv-login/auth/login
 Content-Type: application/json
 
 {
