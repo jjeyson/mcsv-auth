@@ -95,4 +95,5 @@ jobs:
           # docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           docker build -f src/main/docker/Dockerfile.jvm -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
+          #comentario
 
