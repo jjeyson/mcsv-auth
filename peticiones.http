@@ -3,8 +3,8 @@ POST http://localhost:8081/mcsv-login/auth/register
 Content-Type: application/json
 
 {
-  "username": "crojas",
-  "password": "crojas"
+  "username": "test",
+  "password": "test"
 }
 
 ### Login de usuario
@@ -12,8 +12,8 @@ POST http://localhost:8081/mcsv-login/auth/login
 Content-Type: application/json
 
 {
-  "username": "crojas",
-  "password": "crojas"
+  "username": "test",
+  "password": "test"
 }
 
 # NOTA:
