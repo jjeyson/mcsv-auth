@@ -1,3 +1,6 @@
+#declarar variable token
+@jwt_token = eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGgtc2VydmljZS5rdWFycXVzLmNvbSIsInN1YiI6ImNyb2phcyIsInVwbiI6ImNyb2phcyIsImdyb3VwcyI6W10sImlhdCI6MTc4NDk0NzExNSwiZXhwIjoxNzg0OTUwNzE1LCJqdGkiOiJjZWE4NGRjZi1lZGYyLTQ4MDgtYjNhNi1jMjY3NjZjZTNjMDgifQ.DPjaeIcihik8p1TxWA5lAHvM_aEFaX0HStxjMGnloXGAi3POdqNo4M3rFhz42hphnzKZc22fjs7x-dP3--A4RrlK0wY4RT4KJWAlZvkPjw_P0ay0iq9la0BfujnJ9jAGk4dkTeVG6XGiGAySLSnR8WNxM_AXqxgWsK_lAhtb518xbX_YsXOKiaU2oFTWK4LogUrjzG9IFa18MupVmeU_etI2kyAcnw1JeZSQYHND8ldB_AIq9hRbZYL1sD4GAZwGhMT50xotcPPiQyHFg13CD1fy8hI7EIFkwGLwE_lG1D7ORTjHFNTzGqllDeWhmQJYEXHUgj_uFLJxnPu2MIKlBA
+
 ### Users - Paginación (UserResource)
 POST http://localhost:9001/users/pagination
 Content-Type: application/json
@@ -10,8 +13,9 @@ Content-Type: application/json
 }
 
 ### Users - Paginación con filtro por username
-POST http://localhost:9001/users/pagination
+POST http://localhost:8081/mcsv-users/users/pagination
 Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
 
 {
   "pageNumber": 0,
