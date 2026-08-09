@@ -29,6 +29,7 @@ public class AuthResource {
     AuthService authService;
     @Inject
     UserRepository userRepository;
+    
     @Inject
     JsonWebToken jsonWebToken;
 

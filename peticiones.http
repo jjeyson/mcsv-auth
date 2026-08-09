@@ -1,5 +1,5 @@
 ### Registro de usuario
-POST http://localhost:8081/mcsv-login/auth/register
+POST http://localhost:9001/auth/register
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login de usuario
-POST http://localhost:8081/mcsv-login/auth/login
+POST http://localhost:9001/auth/login
 Content-Type: application/json
 
 {
@@ -21,12 +21,12 @@ Content-Type: application/json
 # Copia el valor de "refresh_token" y "access_token" de la respuesta para usarlos en las siguientes peticiones.
 
 ### Refresh token
-POST http://localhost:8080/auth/refresh
+POST http://localhost:9001/auth/refresh
 Content-Type: application/json
 
 {
-  "username": "crojas",
-  "refresh_token": "5dad3a4b-9427-4e5b-8817-ea9f144a1ba0"
+  "username": "test",
+  "refresh_token": "212e31e7-9f5d-4f41-92b5-967843b22dbe"
 }
 
 ### Validar token

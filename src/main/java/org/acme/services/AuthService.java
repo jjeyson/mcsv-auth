@@ -3,11 +3,14 @@ package org.acme.services;
 
 import java.time.Duration;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import org.acme.models.Rols;
+import org.acme.models.RolsUser;
 import org.acme.models.User;
+import org.acme.repository.RolUserRepository;
 import org.acme.repository.RolsRepository;
 import org.acme.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -32,6 +35,9 @@ public class AuthService {
 
     @Inject
     RolsRepository rolsRepository;
+
+    @Inject
+    RolUserRepository rolUserRepository;
 
     @Inject
     EntityManager entityManager;
@@ -61,16 +67,18 @@ public class AuthService {
 
     public String generateAccessToken(User user) {
         Set<String> rolesSet = new HashSet<>();
-        if (user.id != null) {
-            for (Rols rol : rolsRepository.findByIdUser(user.id)) {
-                if (rol.descripcion != null) {
-                    String descripcion = rol.descripcion.trim();
-                    if (!descripcion.isEmpty()) {
-                        rolesSet.add(descripcion);
-                    }
-                }
-            }
-        }
+        rolesSet = getRolesByUserId(user.id);
+
+        // if (user.id != null) {
+        //     for (Rols rol : rolsRepository.findByIdUser(user.id)) {
+        //         if (rol.descripcion != null) {
+        //             String descripcion = rol.descripcion.trim();
+        //             if (!descripcion.isEmpty()) {
+        //                 rolesSet.add(descripcion);
+        //             }
+        //         }
+        //     }
+        // }
         return Jwt.issuer(jwtIssuer)
                 .subject(user.username)
                 .upn(user.username)
@@ -83,7 +91,7 @@ public class AuthService {
     public String generateRefreshToken(User user) {
         String refreshToken = UUID.randomUUID().toString();
         user.refreshToken = refreshToken;
-        entityManager.merge(user);
+        //entityManager.merge(user);
         return refreshToken;
     }
 
@@ -98,5 +106,22 @@ public class AuthService {
 
     public boolean verifyPassword(String password, String hash) {
         return BCrypt.checkpw(password, hash);
+    }
+
+    
+    Set<String> getRolesByUserId(Long userId) {
+        Set<String> rolesSet = new HashSet<>();
+
+        List<RolsUser> rolUsers = rolUserRepository.findByUserId(userId);
+
+        for (RolsUser rolUser : rolUsers) {
+            if (rolUser.rol != null && rolUser.rol.descripcion != null) {
+                String descripcion = rolUser.rol.descripcion.trim();
+                if (!descripcion.isEmpty()) {
+                    rolesSet.add(descripcion);
+                }
+            }
+        }
+        return rolesSet;
     }
 }
