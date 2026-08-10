@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.acme.models.Rols;
 import org.acme.models.RolsUser;
 import org.acme.models.User;
 import org.acme.repository.RolUserRepository;
 import org.acme.repository.RolsRepository;
 import org.acme.repository.UserRepository;
+import org.acme.view.UserRolView;
 import org.mindrot.jbcrypt.BCrypt;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
@@ -112,16 +112,26 @@ public class AuthService {
     Set<String> getRolesByUserId(Long userId) {
         Set<String> rolesSet = new HashSet<>();
 
-        List<RolsUser> rolUsers = rolUserRepository.findByUserId(userId);
+        // List<RolsUser> rolUsers = rolUserRepository.findByUserId(userId);
+        List<UserRolView> userRolViews = rolUserRepository.findUserRolViews(userId);
 
-        for (RolsUser rolUser : rolUsers) {
-            if (rolUser.rol != null && rolUser.rol.descripcion != null) {
-                String descripcion = rolUser.rol.descripcion.trim();
-                if (!descripcion.isEmpty()) {
-                    rolesSet.add(descripcion);
+        for(UserRolView userRolView : userRolViews) {
+            if (userRolView.rolName() != null) {
+                String rolName = userRolView.rolName().trim();
+                if (!rolName.isEmpty()) {
+                    rolesSet.add(rolName);
                 }
             }
         }
+
+        // for (RolsUser rolUser : rolUsers) {
+        //     if (rolUser.rol != null && rolUser.rol.descripcion != null) {
+        //         String descripcion = rolUser.rol.descripcion.trim();
+        //         if (!descripcion.isEmpty()) {
+        //             rolesSet.add(descripcion);
+        //         }
+        //     }
+        // }
         return rolesSet;
     }
 }
