@@ -5,6 +5,7 @@ import java.util.List;
 import org.acme.models.RolsUser;
 import org.acme.view.UserRolView;
 
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -12,7 +13,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 
 @ApplicationScoped
-public class RolUserRepository implements PanacheRepositoryBase<RolsUser, Long> {
+public class RolUserRepository implements PanacheRepository<RolsUser> {
 
 
 
@@ -31,6 +32,7 @@ public class RolUserRepository implements PanacheRepositoryBase<RolsUser, Long> 
     }
 
     public List<UserRolView> findUserRolViews(Long userId) {
+
 
         return getEntityManager().createQuery(
                 "SELECT new org.acme.view.UserRolView(u.id, u.username, r.idRol, r.descripcion) " +
