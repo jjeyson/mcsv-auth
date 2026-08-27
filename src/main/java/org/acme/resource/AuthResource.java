@@ -50,6 +50,8 @@ public class AuthResource {
     @POST
     @Path("/login")
     public Response login(LoginRequest req) {
+        System.out.println("===================================");
+        System.out.println("Login request received: " + req.username);
         String username = req.username;
         String password = req.password;
         User user = authService.validateCredentials(username, password);

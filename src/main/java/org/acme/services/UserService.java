@@ -33,10 +33,10 @@ public class UserService {
 
         String jpql =
         "SELECT " +
-        "p.id, p.username, p.email, p.telefono, p.isActive" +
+        "p.id, p.username, p.email, p.telefono, p.isActive, p.createdAt" +
         " FROM User p";   
 
-        List<String> fieldsDto = List.of("id", "username", "email", "telefono", "isActive");
+        List<String> fieldsDto = List.of("id", "username", "email", "telefono", "isActive", "createdAt");
      
         Map<String, Object> filtersMap = new HashMap<>();
         if(paginationModel.getFilters() != null && !paginationModel.getFilters().isEmpty()){
