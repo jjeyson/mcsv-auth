@@ -1,6 +1,9 @@
 
 package org.acme.resource;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.Produces;
+import org.acme.dto.RegisterResponse;
 import org.acme.models.User;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -8,7 +11,6 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -16,6 +18,13 @@ import org.acme.repository.UserRepository;
 import org.acme.services.AuthService;
 
 import java.util.HashMap;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.core.Response;
+
 import java.util.Map;
 import org.acme.dto.RegisterRequest;
 import org.acme.dto.LoginRequest;
@@ -36,15 +45,25 @@ public class AuthResource {
     @POST
     @Path("/register")
     @Transactional
-    public Response register(RegisterRequest req) {
-        String username = req.username;
-        String password = req.password;
-        //String roles = req.roles != null ? req.roles : "USER";
+    public Response register(
+            @NotNull(message = "El cuerpo de la solicitud es obligatorio")
+            @Valid RegisterRequest req) {
+
+        String username = req.username.trim();
+
         if (userRepository.findByUsername(username) != null) {
-            return Response.status(Response.Status.CONFLICT).entity("Usuario ya existe").build();
+            return Response.status(Response.Status.CONFLICT)
+                    .entity(Map.of("message", "Usuario ya existe"))
+                    .build();
         }
-        User user = authService.register(username, password, "");
-        return Response.ok().entity(user).build();
+
+        User user = authService.register(username, req.password, "");
+
+        RegisterResponse response = new RegisterResponse(user.username);
+
+        return Response.status(Response.Status.CREATED)
+                .entity(response)
+                .build();
     }
 
     @POST

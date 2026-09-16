@@ -8,7 +8,7 @@
 
     <properties>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -102,20 +102,28 @@
             <artifactId>x-artefacto-pagination</artifactId>
             <version>1.0.8</version>
         </dependency>
-        
-
+        <!-- Validar los campos del DTO mediante anotaciones y activar esa validación con @Valid -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
+        </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/THINK-QUARKUS/x-artefacto-pagination</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
+<repositories>
+    <repository>
+        <id>github</id>
+        <name>GitHub Packages - x-artefacto-pagination</name>
+        <url>https://maven.pkg.github.com/think-quarkus/x-artefacto-pagination</url>
+
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+</repositories>
 
     <build>
         <plugins>

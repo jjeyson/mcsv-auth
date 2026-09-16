@@ -55,14 +55,24 @@ public class AuthService {
         
         log.info("Validating credentials for user: {}", username);
 
+        if (username == null || username.isBlank() || password == null) {
+            log.info("Credentials null for user: {}", username);
+            return null;
+        }
+
         User user = userRepository.findByUsername(username);
         log.info("User found: {}", user != null ? user.username : "null");
-        if (user != null && verifyPassword(password, user.passwordHash)) {
-            log.info("Password verified for user: {}", username);
-            return user;
+        if (user == null || !user.isActive) {
+            log.info("Account inactive for user: {}", username);
+            return null;
         }
-        log.info("Invalid credentials for user: {}", username);
-        return null;
+
+        if (!verifyPassword(password, user.passwordHash)) {
+            log.info("Invalid credentials for user: {}", username);
+            return null;
+        }
+        log.info("Password verified for user: {}", username);
+        return user;
     }
 
     public String generateAccessToken(User user) {
@@ -91,7 +101,7 @@ public class AuthService {
     public String generateRefreshToken(User user) {
         String refreshToken = UUID.randomUUID().toString();
         user.refreshToken = refreshToken;
-        //entityManager.merge(user);
+        entityManager.merge(user);
         return refreshToken;
     }
 

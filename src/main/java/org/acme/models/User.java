@@ -26,7 +26,7 @@ public class User {
     @Column(nullable = false)
     public String passwordHash;
 
-    @Column
+    @Column(name = "refresh_token")
     public String refreshToken;
 
     @Column(name = "is_active")
