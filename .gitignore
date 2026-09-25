@@ -38,6 +38,8 @@ nb-configuration.xml
 
 # Local environment
 .env
+.env.*
+!.env.example
 
 # Plugin directory
 /.quarkus/cli/plugins/
@@ -45,4 +47,3 @@ nb-configuration.xml
 .certs/
 
 **/private_key.pem
-**/application-dev.properties

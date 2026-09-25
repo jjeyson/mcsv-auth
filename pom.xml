@@ -112,8 +112,8 @@
 <repositories>
     <repository>
         <id>github</id>
-        <name>GitHub Packages - x-artefacto-pagination</name>
-        <url>https://maven.pkg.github.com/think-quarkus/x-artefacto-pagination</url>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/jjeyson/x-artefacto-pagination</url>
 
         <releases>
             <enabled>true</enabled>
