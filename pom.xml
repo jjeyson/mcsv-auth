@@ -100,7 +100,7 @@
         <dependency>
             <groupId>com.think</groupId>
             <artifactId>x-artefacto-pagination</artifactId>
-            <version>1.0.8</version>
+            <version>1.0.9</version>
         </dependency>
         <!-- Validar los campos del DTO mediante anotaciones y activar esa validación con @Valid -->
         <dependency>
